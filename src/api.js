@@ -28,6 +28,18 @@ app.get("/state/:id", async (req, res) => {
     const { id } = req.params;
     const data = await readFunction(id);
     const response = JSON.parse(new TextDecoder().decode(data));
+
+    res.send(response.state);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.get("/super-state/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await readFunction(id);
+    const response = JSON.parse(new TextDecoder().decode(data));
     delete response.lastProcessedSequentialId;
 
     res.send(response);
