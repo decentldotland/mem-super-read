@@ -1,0 +1,31 @@
+{
+  "name": "mem-super-read",
+  "version": "0.0.1",
+  "description": "MEM reading gateway",
+  "main": "./src/api.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/api.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/decentldotland/mem-super-read.git"
+  },
+  "keywords": [
+    "MEM",
+    "gateway"
+  ],
+  "author": "charmful0x",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/decentldotland/mem-super-read/issues"
+  },
+  "homepage": "https://github.com/decentldotland/mem-super-read#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  }
+}
