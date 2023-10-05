@@ -10,7 +10,7 @@
 
 #### Base API endpoint: https://mem-api.com
 
-- `GET /state` : equivalento to `https://api.mem.tech/api/state/`
+- `GET /state` : equivalen to to `https://api.mem.tech/api/state/`
 - `GET /super-state` : returns state plus additional onchain contract-related data.
 
 ## License
