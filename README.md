@@ -12,6 +12,7 @@
 
 - `GET /state` : equivalent to `https://api.mem.tech/api/state/`
 - `GET /super-state` : returns state plus additional onchain contract-related data.
+- `POST /transactions` : same behavior of `https://api.mem.tech/api/transactions`
 
 ## License
 This repository is licensed under the [MIT license](./LICENSE)

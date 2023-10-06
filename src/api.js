@@ -1,6 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
 import { readFunction } from "./utils/supabase.js";
+import { writeContract } from "./utils/write.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -23,11 +25,18 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "An internal server error occurred." });
 });
 
+app.use(
+  cors({
+    origin: "*",
+  }),
+);
+
 app.get("/state/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const data = await readFunction(id);
     const response = JSON.parse(new TextDecoder().decode(data));
+    delete response.lastProcessedSequentialId;
 
     res.send(response.state);
   } catch (error) {
@@ -43,6 +52,18 @@ app.get("/super-state/:id", async (req, res) => {
     delete response.lastProcessedSequentialId;
 
     res.send(response);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/transactions", async (req, res) => {
+  try {
+    const { functionId, inputs } = req.body;
+
+    const tx = await writeContract(inputs, functionId);
+
+    res.send(tx);
   } catch (error) {
     console.log(error);
   }
