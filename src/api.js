@@ -59,9 +59,9 @@ app.get("/super-state/:id", async (req, res) => {
 
 app.post("/transactions", async (req, res) => {
   try {
-    const { functionId, inputs } = req.body;
+    const { functionId, inputs, ignoreState } = req.body;
 
-    const tx = await writeContract(inputs, functionId);
+    const tx = await writeContract(inputs, functionId, ignoreState);
 
     res.send(tx);
   } catch (error) {
