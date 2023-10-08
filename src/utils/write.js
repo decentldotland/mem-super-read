@@ -14,9 +14,9 @@ export async function writeContract(inputs, function_id, ignoreState) {
         },
       },
     );
-
+    
     if (ignoreState) {
-      delete req?.data?.execution?.state;
+      delete req?.data?.data?.execution?.state;
     }
 
     return req?.data;
