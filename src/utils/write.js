@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function writeContract(inputs, function_id) {
+export async function writeContract(inputs, function_id, ignoreState) {
   try {
     const req = await axios.post(
       "https://api.mem.tech/api/transactions",
@@ -14,6 +14,10 @@ export async function writeContract(inputs, function_id) {
         },
       },
     );
+
+    if (ignoreState) {
+      delete req?.data?.execution?.state;
+    }
 
     return req?.data;
   } catch (error) {
