@@ -57,6 +57,19 @@ app.get("/super-state/:id", async (req, res) => {
   }
 });
 
+app.get("/kv/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await readFunction(id);
+    const response = JSON.parse(new TextDecoder().decode(data));
+    delete response.lastProcessedSequentialId;
+
+    res.send(response.kv);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.post("/transactions", async (req, res) => {
   try {
     const { functionId, inputs, ignoreState } = req.body;
