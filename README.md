@@ -10,8 +10,9 @@
 
 #### Base API endpoint: https://mem-api.com
 
-- `GET /state` : equivalent to `https://api.mem.tech/api/state/`
-- `GET /super-state` : returns state plus additional onchain contract-related data.
+- `GET /state/:function_id` : equivalento to `https://api.mem.tech/api/state/`
+- `GET /super-state/:function_id` : returns state plus additional onchain contract-related data.
+- `GET /kv/:function_id`
 - `POST /transactions` : same behavior of `https://api.mem.tech/api/transactions`
 
 ## License
