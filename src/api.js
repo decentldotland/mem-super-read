@@ -2,7 +2,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import { readFunction } from "./utils/supabase.js";
-import { writeContract } from "./utils/write.js";
+import { writeFunction } from "./utils/write.js";
+import { mip3ReadFunction, mip3WriteFunction } from "./utils/mip3.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -44,6 +45,19 @@ app.get("/state/:id", async (req, res) => {
   }
 });
 
+app.get("/mip3-state/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await mip3ReadFunction(id);
+    const response = JSON.parse(new TextDecoder().decode(data));
+    delete response.lastProcessedSequentialId;
+
+    res.send(response.state);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.get("/super-state/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -74,7 +88,19 @@ app.post("/transactions", async (req, res) => {
   try {
     const { functionId, inputs, ignoreState } = req.body;
 
-    const tx = await writeContract(inputs, functionId, ignoreState);
+    const tx = await writeFunction(inputs, functionId, ignoreState);
+
+    res.send(tx);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/mip3-transactions", async (req, res) => {
+  try {
+    const { functionId, inputs, ignoreState } = req.body;
+
+    const tx = await mip3WriteFunction(inputs, functionId, ignoreState);
 
     res.send(tx);
   } catch (error) {
