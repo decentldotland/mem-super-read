@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function writeContract(inputs, function_id, ignoreState) {
+export async function writeFunction(inputs, function_id, ignoreState) {
   try {
     const req = await axios.post(
       "https://api.mem.tech/api/transactions",
